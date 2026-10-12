@@ -101,7 +101,7 @@ func getOriginals(root string) ([]File, error) {
 			return err
 		}
 		switch fi.Name() {
-		case "img", "bot", ".bot", "prv":
+		case "img", "bot", ".bot", "prv", "seek":
 			return filepath.SkipDir
 		}
 		f := File(p)

@@ -101,7 +101,7 @@ func getOriginals(root string) ([]File, error) {
 			return err
 		}
 		switch fi.Name() {
-		case "img", "bot", ".bot", "prv":
+		case "img", "bot", ".bot", "prv", "seek":
 			return filepath.SkipDir
 		}
 		f := File(p)
@@ -175,6 +175,10 @@ func (f File) originalPaths() []string {
 		return []string{strings.Replace(path, ".txt", "", 1)}
 	}
 	panic(fmt.Sprintf("originalPath: invalid file extension: %v", path))
+}
+
+func (f File) cachedFromSeek() bool {
+	return filepath.Base(filepath.Dir(filepath.Dir(filepath.Dir(f.path())))) == "seek"
 }
 
 func replaceMultiExt(path, origExt string) []string {

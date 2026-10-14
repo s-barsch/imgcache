@@ -103,7 +103,7 @@ func DeleteCached(root string) error {
 		return err
 	}
 	for _, cacheFile := range cacheFiles {
-		shouldDelete := !multiExists(cacheFile.originalPaths())
+		shouldDelete := cacheFile.cachedFromSeek() || !multiExists(cacheFile.originalPaths())
 		if !shouldDelete {
 			name := filepath.Base(cacheFile.path())
 			shouldDelete = filepath.Ext(name) == ".webp" || strings.Contains(name, "_blur")

@@ -177,6 +177,10 @@ func (f File) originalPaths() []string {
 	panic(fmt.Sprintf("originalPath: invalid file extension: %v", path))
 }
 
+func (f File) cachedFromSeek() bool {
+	return filepath.Base(filepath.Dir(filepath.Dir(filepath.Dir(f.path())))) == "seek"
+}
+
 func replaceMultiExt(path, origExt string) []string {
 	ret := make([]string, 0)
 
